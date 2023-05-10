@@ -91,6 +91,18 @@ func TestAdd(t *testing.T) {
 	d := NewUli("10000000000000001")
 	d1 := NewUli("100000000000000000000000000000001")
 
+	a1 := NewUli("0")
+	b2 := NewUli("ffffffffffffffff")
+	c2 := a1.Add(b2)
+	d2 := NewUli("ffffffffffffffff")
+
+	a2 := NewUli("ffffffffffffffff")
+	b3 := NewUli("ffffffffffffffffffffffffffffffff")
+	c3 := a2.Add(b3)
+	d3 := NewUli("10000000000000000fffffffffffffffe")
+
 	assert.Equal(t, d1.GetHex(), c1.GetHex(), "The two numbers should be the same.")
 	assert.Equal(t, d.GetHex(), c.GetHex(), "The two numbers should be the same.")
+	assert.Equal(t, d2.GetHex(), c2.GetHex(), "The two numbers should be the same.")
+	assert.Equal(t, d3.GetHex(), c3.GetHex(), "The two numbers should be the same.")
 }

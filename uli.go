@@ -176,6 +176,13 @@ func (num *Uli) LeftShift(shift int) *Uli {
 }
 
 func (num *Uli) Add(secondNum *Uli) *Uli {
+
+	if AllZeros(num.bitsArr) {
+		return secondNum
+	} else if AllZeros(secondNum.bitsArr) {
+		return num
+	}
+
 	cf := uint64(0)
 	l := 0
 
@@ -211,7 +218,7 @@ func (num *Uli) Add(secondNum *Uli) *Uli {
 				if value2 > value1 {
 					result.bitsArr[l-i] = (value1 - 1) - (maxValue - value2) + 1
 				} else {
-					result.bitsArr[l-i] = (value1 - 1) - (maxValue - value2) + 1
+					result.bitsArr[l-i] = (value2 - 1) - (maxValue - value1) + 1
 				}
 				cf = 1
 			} else {
@@ -223,7 +230,7 @@ func (num *Uli) Add(secondNum *Uli) *Uli {
 				if value2 > value1 {
 					result.bitsArr[l-i] = (value1 - 1) - (maxValue - value2)
 				} else {
-					result.bitsArr[l-i] = (value1 - 1) - (maxValue - value2)
+					result.bitsArr[l-i] = (value2 - 1) - (maxValue - value1)
 				}
 				cf = 1
 			} else {
@@ -272,4 +279,18 @@ func Div2Blocks(strNum string) []uint64 {
 	}
 
 	return blocksArr
+}
+
+func AllZeros(array []uint64) bool {
+	l := len(array)
+	tmp := make([]uint64, l)
+	flag := true
+
+	for i := 0; i < l; i++ {
+		if array[i] != tmp[i] {
+			flag = false
+		}
+	}
+
+	return flag
 }
