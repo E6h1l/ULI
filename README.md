@@ -1,5 +1,5 @@
 # Long arithmetic own implementation in Go
-Implemented logical operations:
+Implemented logical and bitwise operations:
 
 Inv (bitwise inversion); Xor (bitwise exclusive or); Or (bitwise exclusive or); AND (bitwise and); 
 
