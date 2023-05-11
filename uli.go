@@ -146,7 +146,6 @@ func (num *Uli) LeftShift(shift int) *Uli {
 
 	for j := 0; j < intShift; j++ {
 		copybitsArr = append(copybitsArr, uint64(0))
-		fmt.Println(copybitsArr)
 	}
 
 	if modeShift == 0 {
@@ -238,6 +237,49 @@ func (num *Uli) Add(secondNum *Uli) *Uli {
 				cf = 0
 			}
 		}
+	}
+
+	return result
+}
+
+func (num *Uli) Sub(secondNum *Uli) *Uli {
+	l := 0
+	cf := uint64(0)
+	const maxValue uint64 = 18446744073709551615
+
+	if len(num.bitsArr) < len(secondNum.bitsArr) {
+		l = len(secondNum.bitsArr)
+	} else {
+		l = len(num.bitsArr)
+	}
+
+	result := NewUli("")
+	result.bitsArr = make([]uint64, l)
+
+	for i := 0; i < l; i++ {
+		var value1 uint64
+		var value2 uint64
+
+		if i < len(secondNum.bitsArr) {
+			value1 = secondNum.bitsArr[len(secondNum.bitsArr)-i-1]
+		} else {
+			value1 = 0
+		}
+
+		if i < len(num.bitsArr) {
+			value2 = num.bitsArr[len(num.bitsArr)-i-1]
+		} else {
+			value2 = 0
+		}
+
+		if value1 > value2-cf {
+			result.bitsArr[l-i-1] = (maxValue - value1) + value2 + 1 - cf
+			cf = 1
+		} else {
+			result.bitsArr[l-i-1] = (value2 - cf) - value1
+			cf = 0
+		}
+
 	}
 
 	return result

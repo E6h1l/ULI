@@ -7,7 +7,7 @@ shiftR (right shift by n bits); shiftL (left shift by n bits);
 
 Implemented arithmetic operations:
 
-Add (addition); other arithmetic operations will be implemented later...
+Add (addition); Sub (subtraction)
 
 # Usage
 It is important to note that the program accepts numbers only in HEX as input.
@@ -22,6 +22,7 @@ a := NewUli("1")
 b := NewUli("2")
 
 c := a.Add(b) //result of addition
+c := b.Sub(a) //result of subtraction
 
 xorRes := a.Xor() //result of xor
 andRes := a.And(b) //result of and

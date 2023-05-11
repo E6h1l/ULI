@@ -1,7 +1,6 @@
 package uli
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -19,7 +18,6 @@ func TestSetHex(t *testing.T) {
 
 	a := NewUli("")
 	a.SetHex("51bf608")
-	fmt.Println(a.GetHex())
 	b := []uint64{85718536}
 
 	assert.Equal(t, a.bitsArr, b, "The two arrays should be the same.")
@@ -105,4 +103,25 @@ func TestAdd(t *testing.T) {
 	assert.Equal(t, d.GetHex(), c.GetHex(), "The two numbers should be the same.")
 	assert.Equal(t, d2.GetHex(), c2.GetHex(), "The two numbers should be the same.")
 	assert.Equal(t, d3.GetHex(), c3.GetHex(), "The two numbers should be the same.")
+}
+
+func TestSub(t *testing.T) {
+	a := NewUli("ffffffffffffffffffffffffffffffff0000000000000000")
+	b := NewUli("ffffffffffffffff")
+	c := a.Sub(b)
+	d := NewUli("fffffffffffffffffffffffffffffffe0000000000000001")
+
+	a1 := NewUli("ffffffffffffffffffffffffffffffff")
+	b1 := NewUli("1")
+	c1 := a1.Sub(b1)
+	d1 := NewUli("fffffffffffffffffffffffffffffffe")
+
+	a2 := NewUli("33ced2c76b26cae94e162c4c0d2c0ff7c13094b0185a3c122e732d5ba77efebc")
+	b2 := NewUli("22e962951cb6cd2ce279ab0e2095825c141d48ef3ca9dabf253e38760b57fe03")
+	c2 := a2.Sub(b2)
+	d2 := NewUli("10e570324e6ffdbc6b9c813dec968d9bad134bc0dbb061530934f4e59c2700b9")
+
+	assert.Equal(t, d.GetHex(), c.GetHex(), "The two numbers should be the same.")
+	assert.Equal(t, d1.GetHex(), c1.GetHex(), "The two numbers should be the same.")
+	assert.Equal(t, d2.GetHex(), c2.GetHex(), "The two numbers should be the same.")
 }
